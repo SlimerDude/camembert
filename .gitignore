@@ -1,3 +1,4 @@
 /push_swt.sh
 dist/*
 swt/*
+build/

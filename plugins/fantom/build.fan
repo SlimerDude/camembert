@@ -6,7 +6,7 @@ using build
 **
 ** build
 **
-class build : BuildPod
+class Build : BuildPod
 {
  new make()
   {
