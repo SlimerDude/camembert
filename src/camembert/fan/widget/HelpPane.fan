@@ -178,7 +178,7 @@ class HelpPane : ContentPane, Themable
   {
     if(browser == null)
       return
-    port := Sys.cur.docServer.port
+    port := Sys.cur.docServer.httpPort
     if(visible == false)
       show
     if(text.contains("://"))

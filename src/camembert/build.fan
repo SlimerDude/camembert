@@ -26,8 +26,10 @@ class Build : BuildPod
                "netColarUtils 1.0.8+",
                "netColarJar 0.1.2+",
                //"rhino 1.7+"
+               "haystack 3.0.15 - 3.0",
+               "skyarcd  3.0.15 - 3.0"
     ]
-    version = Version("1.1.12")
+    version = Version("1.1.14")
     srcDirs = [`fan/`,
                `fan/space/`,
                `fan/view/`,

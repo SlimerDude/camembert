@@ -9,7 +9,7 @@ using netColarJar
 ** Standalone jar installer/ runner for camembert
 ** Use "fan build.fan & fan build.fan jar" to build the standalone jar
 **
-class build : BuildPod
+class Build : BuildPod
 {
   new make()
   {

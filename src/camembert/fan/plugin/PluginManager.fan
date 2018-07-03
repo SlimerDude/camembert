@@ -21,7 +21,7 @@ const class PluginManager : Service
   new make(File configDir)
   {
     this.configDir = configDir
-    pods := Pod.list.findAll {it.meta.containsKey("camembert.plugin")}
+	pods := findPluginPods
     Str:Plugin temp := [:]
 
     // find the plugins
@@ -57,6 +57,17 @@ const class PluginManager : Service
     plugins = temp
   }
 
+
+	Pod[] findPluginPods() {
+		Env.cur.findAllPodNames.map |podName->Pod?| {
+			podFile := Env.cur.findPodFile(podName)
+			zip := Zip.open(podFile)
+			meta := zip.contents[`/meta.props`]?.readProps
+			zip.close
+			return meta.containsKey("camembert.plugin") ? Pod.load(podFile.in) : null
+		}.exclude { it == null }
+	}
+	
   internal Void onInit()
   {
     plugins.vals.each |plugin| {plugin.onInit(configDir)}

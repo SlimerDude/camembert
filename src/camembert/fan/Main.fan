@@ -48,7 +48,7 @@ class Main
     path := Text
     {
       prefCols = 60
-      text = Env.cur.homeDir.parent.normalize.osPath + "/camembert/"
+      text = props.parent.osPath
     }
 
     if( ! props.exists)

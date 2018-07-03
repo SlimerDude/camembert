@@ -15,6 +15,7 @@ using camembert
 const class FantomDocs : PluginDocs
 {
   const FantomPlugin plugin
+  const DefaultDocEnv docEnv := DefaultDocEnv()
 
   new make(FantomPlugin plugin)
   {
@@ -36,7 +37,7 @@ const class FantomDocs : PluginDocs
     if(query.contains("#"))
       query = query[0 ..< query.index("#")]
     info := FantomPlugin.cur.index.matchTypes(query, MatchKind.exact).first
-    if(info.toFile == null || ! info.toFile.exists)
+    if(info?.toFile == null || ! info.toFile.exists)
       return null
     return info != null ? FantomItem(info) : null
   }
@@ -309,7 +310,7 @@ const class FantomDocs : PluginDocs
     result := "Failed to read pod doc !"
     try
     {
-      doc := DocPod(podFile)
+      doc := DocPod.load(docEnv, podFile)
       if(doc.podDoc != null)
         result = docToHtml(req, doc.podDoc.doc)
       else
@@ -325,7 +326,7 @@ const class FantomDocs : PluginDocs
     result := "Failed to read pod doc !"
     try
     {
-      doc := DocPod(podFile)
+      doc := DocPod.load(docEnv, podFile)
 
       DocType? type := doc.type(typeName, false)
 
@@ -361,7 +362,7 @@ const class FantomDocs : PluginDocs
     result := ""
     try
     {
-      doc := DocPod(pod.podFile)
+      doc := DocPod.load(docEnv, pod.podFile)
 
       libs := pod.types.findAll{it.isAxonLib}
 

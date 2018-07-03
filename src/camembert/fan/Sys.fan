@@ -58,7 +58,7 @@ const class Sys : Service
     commands = Commands(this)
     prjReg = ProjectRegistry(options.srcDirs, optionsFile.parent)
     wPort := NetUtils.findAvailPort(8787)
-    docServer = WispService { port = wPort; root = DocWebMod() }.start
+    docServer = WispService { httpPort = wPort; root = DocWebMod() }.start
     pm = Unsafe(ProcessManager())
 
     // read the templates
